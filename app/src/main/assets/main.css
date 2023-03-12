@@ -1,0 +1,40 @@
+body {
+    background-color: #37ad4f;
+}
+@media only screen and (max-width: 480px) {
+    body { 
+        background-color: #37ad4f;
+        margin-left: 17%;
+       }
+    }
+    @media only screen and (max-width: 500px) {
+        body { 
+            background-color: #37ad4f;
+            margin-left: 17%;
+           }
+        }
+
+.nav-link.py-3.rounded-0 {
+    color: #fff;
+}
+
+.nav-link.py-3.rounded-0:hover {
+    color: #fd7e14;
+}
+
+.fw-light {
+    color: #fff;
+}
+
+.container{
+    margin-right: 5%;
+}
+
+.card{
+    background-color:  #166e12;
+    border-radius: 20px;
+    border:none;
+} 
+h6.card-text{
+     color: #fff;
+}
