@@ -13,6 +13,8 @@ import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.helper.widget.Layer
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,15 +25,15 @@ class MainActivity : AppCompatActivity() {
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager;
         val networkInfo = connectivityManager.activeNetwork;
         val capabilities = connectivityManager.getNetworkCapabilities(networkInfo)
-        //Creamos un webview
+        //Creamos un webview, progress, imageview
         val webView = findViewById<WebView>(R.id.webView)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val imageView = findViewById<ImageView>(R.id.imageView)
 
-
+            //Creamos el vínculo de nuestra red
         var url = "https://micultivov4.000webhostapp.com"
 
-        //Verificamos si cumple con la conectividad
+        //Verificamos si cumple con la conectividad y que la URL sea accesible
         if (capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(
                 NetworkCapabilities.TRANSPORT_CELLULAR) && (URLUtil.isValidUrl(url)))
         ) {
@@ -53,15 +55,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 //Si hay un error nos dirige a una plantilla para obligar a que verifique su conexion a red
-                override fun onReceivedError(
-                    view: WebView?,
-                    request: WebResourceRequest?,
-                    error: WebResourceError?
-                ) {
-                    //Inicia la actividad donde se aloja el error
-                    super.onReceivedError(view, request, error)
-                    startActivity(Intent(this@MainActivity, errornoint::class.java))
+                override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
 
+                    imageView.visibility = View.VISIBLE
+                    progressBar.visibility = View.VISIBLE
+
+                    webView.visibility = View.INVISIBLE
+
+                    //Inicia la actividad donde se aloja el error
+                    startActivity(Intent(this@MainActivity, errornoint::class.java))
                 }
             }
             //Habilita el JS
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             //Carga nuestro JS
             webView.loadUrl("https://micultivov4.000webhostapp.com");
         } else {
-            startActivity(Intent(this@MainActivity, errornoint::class.java))
+          startActivity(Intent(this@MainActivity, errornoint::class.java))
         }
     }
 
@@ -83,6 +85,4 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("No", null)
             .show()
     }
-
-
 }

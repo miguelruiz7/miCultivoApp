@@ -12,34 +12,28 @@ class errornoint : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_errornoint)
         //Muestra un mensaje donde no hay conexion a internet al cargar la vista
-        Toast.makeText(this@errornoint,"No tienes conexion a internet", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@errornoint,"Verifica que los datos ó WIFI esten activos y dispongas de red", Toast.LENGTH_LONG).show()
 
+        //Carga un reintento
 
-        //Si se presiona el botón reintentar
-        val intentarcon = findViewById<Button>(R.id.intentar_con)
-        intentarcon.setOnClickListener{
-            // Iniciara la actividad principal
-            startActivity(Intent(this@errornoint,MainActivity::class.java))
-        }
+        AlertDialog.Builder(this@errornoint)
+            .setMessage("No dispones conexión a red ¿Deseas reintentarlo?")
+            .setPositiveButton("Si") { _, _ ->
+                startActivity(Intent(this@errornoint,MainActivity::class.java))
+            }
+            .setNegativeButton("Salir"){_,_ ->
+                finishAffinity()
+            }
+            .setCancelable(false)
+            .show()
 
-
-        // Si se presiona el botón salir.
-        val salirte = findViewById<Button>(R.id.salir)
-        salirte.setOnClickListener{
-            // Terminar actividad
-            this.finishAffinity()
-
-        }
+            .setCanceledOnTouchOutside(false)
     }
+
+
 
     //Si presionas el botón de atras te preguntará si deseas salir
     override fun onBackPressed() {
-        AlertDialog.Builder(this)
-            .setMessage("¿Estas seguro que deseas salir?")
-            .setPositiveButton("Si") { _, _ ->
-                this.finishAffinity()
-            }
-            .setNegativeButton("No", null)
-            .show()
+
     }
 }
