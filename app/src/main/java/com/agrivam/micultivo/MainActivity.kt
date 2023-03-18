@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val imageView = findViewById<ImageView>(R.id.imageView)
 
             //Creamos el vínculo de nuestra red
-        var url = "https://micultivov4.000webhostapp.com"
+        var url = "https://micultivov5.000webhostapp.com"
 
         //Verificamos si cumple con la conectividad y que la URL sea accesible
         if (capabilities != null && (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             //Habilita el JS
             webView.settings.javaScriptEnabled = true;
             //Carga nuestro JS
-            webView.loadUrl("https://micultivov4.000webhostapp.com");
+            webView.loadUrl(url);
         } else {
           startActivity(Intent(this@MainActivity, errornoint::class.java))
         }
